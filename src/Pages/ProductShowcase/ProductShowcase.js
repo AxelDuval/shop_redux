@@ -17,19 +17,38 @@ export default function ProductShowcase() {
     setNbMugs(Number(e.target.value));
   };
 
-const addToCart = e => {
-  e.preventDefault()
+  const addToCart = (e) => {
+    e.preventDefault();
 
-  const itemAdded = {
-    ...inventory[productClicked],
-    quantity: nbMugs
-  }
+    const itemAdded = {
+      ...inventory[productClicked],
+      quantity: nbMugs,
+    };
 
-  dispatch({
-    type: "ADDITEM",
-    payload: itemAdded
-  })
-}
+    dispatch({
+      type: "ADDITEM",
+      payload: itemAdded,
+    });
+    addingInfo.current.innerText = "Added to cart";
+
+    if (display) {
+      display = false;
+      timerInfo = setTimeout(() => {
+        addingInfo.current.innerText = "";
+        display = true;
+      }, 700);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerInfo);
+    };
+  }, []);
+
+  const addingInfo = useRef();
+  let timerInfo;
+  let display = true;
 
   return (
     <div className="showcase">
@@ -55,7 +74,7 @@ const addToCart = e => {
             onChange={updateMugs}
           />
           <button>Add to cart</button>
-          <span className="adding-info"></span>
+          <span className="adding-info" ref={addingInfo}></span>
         </form>
       </div>
     </div>
