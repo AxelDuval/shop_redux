@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 export default function ProductShowcase() {
   const [nbMugs, setNbMugs] = useState(1);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const productClicked = inventory.findIndex(
     (obj) => obj.title.replace(/\s+/g, "").trim() === id
@@ -15,6 +16,20 @@ export default function ProductShowcase() {
   const updateMugs = (e) => {
     setNbMugs(Number(e.target.value));
   };
+
+const addToCart = e => {
+  e.preventDefault()
+
+  const itemAdded = {
+    ...inventory[productClicked],
+    quantity: nbMugs
+  }
+
+  dispatch({
+    type: "ADDITEM",
+    payload: itemAdded
+  })
+}
 
   return (
     <div className="showcase">
@@ -31,7 +46,7 @@ export default function ProductShowcase() {
       <div className="product-infos">
         <h2>{inventory[productClicked].title}</h2>
         <p>{inventory[productClicked].price}€</p>
-        <form>
+        <form onSubmit={addToCart}>
           <label htmlFor="quantity">Quantity</label>
           <input
             type="number"
