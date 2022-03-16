@@ -5,8 +5,8 @@ import './Navbar.css'
 export default function Navbar() {
   return (
     <nav className="nav-top">
-      <Link to="/">Accueil</Link>
-      <Link to="/products">Produits</Link>
+      <Link to="/">Home</Link>
+      <Link to="/products">Products</Link>
       <Link to="/contact">Contact</Link>
     </nav>
   );

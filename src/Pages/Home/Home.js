@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="global-container">
       <h1 className="home-title">
-        Bienvenue sur le <span>shop</span> !
+        Welcome to the <span>shop</span> !
       </h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
