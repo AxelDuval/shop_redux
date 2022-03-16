@@ -59,7 +59,7 @@ export default function ProductShowcase() {
             process.env.PUBLIC_URL +
             `/images/${inventory[productClicked].img}.png`
           }
-          alt="product image"
+          alt={inventory[productClicked].title}
         />
       </div>
       <div className="product-infos">
